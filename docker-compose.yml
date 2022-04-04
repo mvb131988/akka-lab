@@ -1,0 +1,12 @@
+version: '2.2'
+services:
+  
+  host1:
+    image: host1
+    ports:
+      - 127.0.0.1:4001:4001
+
+  host2:
+    image: host2
+    ports:
+      - 127.0.0.1:4002:4002

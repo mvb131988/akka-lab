@@ -1,0 +1,9 @@
+*.jar
+\.project
+\.classpath
+\.factorypath
+\.settings/
+target/*
+/target/
+log*
+jdk-17_linux-x64_bin.tar.gz

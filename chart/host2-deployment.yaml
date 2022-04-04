@@ -1,0 +1,44 @@
+#minikube service host2-service
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: host2-deployment
+  labels:
+    app: host2
+    podapp: routes
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: host2
+  template:
+    metadata:
+      labels:
+        app: host2
+        podapp: routes
+    spec:
+      serviceAccountName: sa-host2
+      containers:
+      - name: host2
+        image: host-0
+        ports:
+        - name: akka
+          containerPort: 2552
+          protocol: TCP
+        - name: http
+          containerPort: 8082
+          protocol: TCP  
+        - name: management
+          containerPort: 9085
+          protocol: TCP
+        env:
+            - name: DEBUG_PORT
+              value: "4002"
+            - name: CLUSTER_HOST
+              value: "host2-service.default.svc.cluster.local"
+            - name: CLUSTER_PORT
+              value: "2552"
+            - name: HTTP_PORT
+              value: "8082"
+        imagePullPolicy: Never
